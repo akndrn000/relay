@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   Relay — tema Sketch Monokrom (hitam-putih murni + abu)
+   Terang: kertas putih/krem. Gelap: abu sangat gelap (bukan hitam pekat).
+   ============================================================ */
+
+:root {
+  --paper: #faf7f0;          /* krem kertas */
+  --paper-soft: #f3efe4;
+  --ink: #1b1b1b;            /* hitam lembut */
+  --ink-soft: #4a4a4a;
+  --ink-faint: #6f6f6e;
+  --line: #1b1b1b;           /* garis sketsa terang */
+  --panel: #fffdf8;
+  --panel-soft: #f3efe4;
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+.dark {
+  --paper: #1e1e20;          /* abu sangat gelap, bukan #000 */
+  --paper-soft: #262628;
+  --ink: #f0ede4;            /* putih kertas */
+  --ink-soft: #c9c6bb;
+  --ink-faint: #8d8d8d;
+  --line: #f0ede4;
+  --panel: #262628;
+  --panel-soft: #2e2e31;
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --font-hand: var(--font-hand);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ---------- Utilitas sketsa: border "digambar tangan" ringan ---------- */
+
+.sketch {
+  border: 2px solid var(--line);
+  /* radius tiap sudut sedikit beda → kesan goresan tangan */
+  border-radius: 6px 9px 7px 10px;
+}
+
+.sketch-panel {
+  border: 2px solid var(--line);
+  border-radius: 8px 11px 9px 12px;
+  background: var(--panel);
+}
+
+.sketch-panel-alt {
+  border: 2px solid var(--line);
+  border-radius: 11px 8px 12px 9px;
+  background: var(--panel-soft);
+}
+
+.sketch-btn {
+  border: 2px solid var(--line);
+  border-radius: 7px 10px 8px 11px;
+  background: transparent;
+  color: var(--foreground);
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.sketch-btn:hover {
+  /* tanpa warna: geser 1-2px + penebalan visual via latar abu */
+  transform: translate(-1px, -1px);
+  border-width: 3px;
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.sketch-btn:active {
+  transform: translate(1px, 1px);
+  border-width: 2px;
+}
+
+.sketch-btn:focus-visible {
+  outline: 2px dashed var(--line);
+  outline-offset: 2px;
+}
+
+/* Lencana status kecil — selalu dipakai bersama .sketch untuk bordernya. */
+.sketch-badge {
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+}
+
+.sketch-input,
+.sketch-textarea {
+  border: 2px solid var(--line);
+  border-radius: 9px 7px 10px 8px;
+  background: transparent;
+  color: var(--foreground);
+}
+
+.sketch-input:focus,
+.sketch-textarea:focus {
+  outline: none;
+  border-width: 3px;
+}
+
+.sketch-input::placeholder,
+.sketch-textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+.font-hand {
+  font-family: var(--font-hand), cursive;
+}
